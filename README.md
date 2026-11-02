@@ -1,0 +1,84 @@
+# Siming Ye · Academic Homepage
+
+An English-language academic personal homepage focused on 3D reconstruction, 3D Gaussian
+Splatting, SLAM, and spatial intelligence. The site uses plain HTML, CSS, and JavaScript and
+requires no framework or build step.
+
+## Preview locally
+
+From this directory, run:
+
+```powershell
+python -m http.server 4173
+```
+
+Then open `http://127.0.0.1:4173/`.
+
+For a section-by-section guide to updating the homepage, repositories, albums, and contact
+details, see [`MAINTENANCE.md`](MAINTENANCE.md).
+
+## Current profile
+
+- Name: Siming Ye
+- Nickname: ysm_Christine
+- Institution: Beijing Institute of Technology
+- Email: yeschristine0429@gmail.com
+- Research: 3D reconstruction, 3DGS, SLAM, and spatial intelligence
+- Portrait: `assets/ysming-profile.jpg`
+
+The research section presents two ongoing directions rather than fabricated papers. Work includes
+one numbered example, while the former Projects area displays two personal-interest panels: vibe
+coding repositories and travel photo albums.
+
+## Add a vibe-coding repository
+
+In `index.html`, find the `repo-card` block inside `vibe-panel`. Replace the
+`GitHub link soon` status with a direct repository link:
+
+```html
+<a class="repo-action" href="https://github.com/username/repository" target="_blank" rel="noreferrer">
+  View repository ↗
+</a>
+```
+
+Copy the `repo-card` block to add more repositories.
+
+## Add photos to an album
+
+Each album has a dedicated page in `albums/` and an image folder in `assets/albums/`. Add photos to
+the matching folder, then replace the `album-empty-state` block with a photo grid:
+
+```html
+<div class="album-photo-grid">
+  <figure>
+    <img src="../assets/albums/weekend-walks/first-photo.jpg" alt="Describe the photo" />
+    <figcaption>An optional caption</figcaption>
+  </figure>
+</div>
+```
+
+Available album pages:
+
+- `albums/weekend-walks.html`
+- `albums/mountain-days.html`
+- `albums/city-after-dark.html`
+
+## Files
+
+- `index.html`: page content, profile details, research areas, interests, and contact information
+- `styles.css`: visual system, portrait treatment, and responsive layouts
+- `script.js`: theme switching, mobile navigation, reveal effects, and email copying
+- `assets/ysming-profile.jpg`: personal portrait
+- `albums/`: standalone photo album pages
+- `assets/albums/`: destination folders for album photographs
+- `favicon.svg`: point-cloud-inspired browser icon
+
+## Deploy to GitHub Pages
+
+1. Create a GitHub repository named `<username>.github.io`.
+2. Commit the contents of this directory to the default branch.
+3. Open **Settings → Pages** and select the default branch as the publishing source.
+4. The site will be available at `https://<username>.github.io`.
+
+After deployment, update the version query parameters for `styles.css` and `script.js` in
+`index.html` whenever a browser continues to show an older cached version.
