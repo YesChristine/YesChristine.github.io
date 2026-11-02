@@ -58,16 +58,8 @@ python -m http.server 4173
 
 搜索 `vibe-panel`。
 
-目前有一张 `Academic Homepage` 仓库卡片。等 GitHub 仓库公开后，把这一行：
-
-```html
-<span class="repo-action is-pending">
-  GitHub link soon
-  <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
-</span>
-```
-
-替换为：
+目前有一张 `Academic Homepage` 仓库卡片，已经链接到当前 GitHub 仓库。若要增加新的仓库，
+复制整个 `repo-card`，然后确保卡片中的链接使用这种格式：
 
 ```html
 <a class="repo-action" href="https://github.com/你的用户名/仓库名" target="_blank" rel="noreferrer">
@@ -76,7 +68,7 @@ python -m http.server 4173
 </a>
 ```
 
-要添加更多 Vibe Coding 成果，复制整个 `repo-card`，修改项目名称、描述、技术标签和链接。
+修改项目名称、描述和技术标签后即可。
 
 ### 04 Interests：旅行相册
 
@@ -140,7 +132,7 @@ python -m http.server 4173
 - `#about`
 - `#research`
 - `#publications`
-- `#projects`
+- `#interest`
 - `#contact`
 
 ## 修改后的发布流程

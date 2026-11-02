@@ -1,5 +1,7 @@
 # Siming Ye · Academic Homepage
 
+**Live site:** [https://yeschristine.github.io/](https://yeschristine.github.io/)
+
 An English-language academic personal homepage focused on 3D reconstruction, 3D Gaussian
 Splatting, SLAM, and spatial intelligence. The site uses plain HTML, CSS, and JavaScript and
 requires no framework or build step.
@@ -32,16 +34,14 @@ coding repositories and travel photo albums.
 
 ## Add a vibe-coding repository
 
-In `index.html`, find the `repo-card` block inside `vibe-panel`. Replace the
-`GitHub link soon` status with a direct repository link:
+The `Academic Homepage` repo card in `index.html` links to this GitHub repository. To add another
+repository, copy the `repo-card` block inside `vibe-panel` and update it with a direct link:
 
 ```html
 <a class="repo-action" href="https://github.com/username/repository" target="_blank" rel="noreferrer">
   View repository ↗
 </a>
 ```
-
-Copy the `repo-card` block to add more repositories.
 
 ## Add photos to an album
 
