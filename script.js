@@ -180,12 +180,17 @@ copyButton?.addEventListener("click", async () => {
     input.remove();
   }
 
-  const label = copyButton.querySelector("span");
-  const originalText = label.textContent;
-  label.textContent = "Copied";
-  copyButton.setAttribute("aria-live", "polite");
+  const label = copyButton.querySelector("[data-copy-status]");
+  const originalText = label?.textContent ?? "Copy";
+
+  if (label) label.textContent = "Copied";
+  copyButton.classList.add("is-copied");
+  copyButton.setAttribute("aria-label", "Email address copied");
+
   window.setTimeout(() => {
-    label.textContent = originalText;
+    if (label) label.textContent = originalText;
+    copyButton.classList.remove("is-copied");
+    copyButton.setAttribute("aria-label", `Copy email address ${email}`);
   }, 1800);
 });
 

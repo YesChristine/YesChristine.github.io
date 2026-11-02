@@ -2161,27 +2161,46 @@ h1 em {
   color: var(--ink);
 }
 
-.copy-button {
+.contact-email-button {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  justify-content: space-between;
+  gap: 20px;
   min-height: 50px;
-  padding: 0 17px;
-  border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--bg);
-  font-size: 0.75rem;
-  font-weight: 600;
+  padding: 0 17px 0 22px;
+  white-space: nowrap;
   cursor: pointer;
-  transition:
-    border-color 180ms ease,
-    background-color 180ms ease;
 }
 
-.copy-button:hover {
-  border-color: color-mix(in srgb, var(--bg) 55%, transparent);
-  background: color-mix(in srgb, var(--bg) 8%, transparent);
+.contact-email-address {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-email-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  min-width: 67px;
+  padding-left: 15px;
+  border-left: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.contact-email-action .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.contact-email-button:hover .contact-email-action,
+.contact-email-button.is-copied .contact-email-action {
+  color: var(--green);
 }
 
 .contact-visual {
@@ -2878,9 +2897,16 @@ h1 em {
     font-size: 0.72rem;
   }
 
-  .copy-button {
+  .contact-email-button {
     width: 100%;
-    justify-content: center;
+    gap: 10px;
+    padding-inline: 14px;
+    font-size: 0.65rem;
+  }
+
+  .contact-email-action {
+    min-width: 54px;
+    padding-left: 10px;
   }
 
   .contact-visual {
@@ -2925,7 +2951,7 @@ h1 em {
   .floating-note,
   .project-window,
   .contact-visual,
-  .copy-button,
+  .contact-email-action,
   .site-footer {
     display: none !important;
   }

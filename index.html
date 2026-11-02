@@ -17,7 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=19" />
+    <link rel="stylesheet" href="styles.css?v=20" />
 
     <script>
       (() => {
@@ -487,13 +487,18 @@
                 and potential research collaborations.
               </p>
               <div class="contact-actions">
-                <a class="button button-light" href="mailto:yeschristine0429@gmail.com">
-                  yeschristine0429@gmail.com
-                  <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
-                </a>
-                <button class="copy-button" type="button" data-copy="yeschristine0429@gmail.com">
-                  <svg class="icon" aria-hidden="true"><use href="#icon-copy"></use></svg>
-                  <span>Copy</span>
+                <button
+                  class="button button-light contact-email-button"
+                  type="button"
+                  data-copy="yeschristine0429@gmail.com"
+                  aria-label="Copy email address yeschristine0429@gmail.com"
+                  title="Copy email address"
+                >
+                  <span class="contact-email-address">yeschristine0429@gmail.com</span>
+                  <span class="contact-email-action" aria-live="polite">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-copy"></use></svg>
+                    <span data-copy-status>Copy</span>
+                  </span>
                 </button>
               </div>
             </div>
@@ -610,6 +615,6 @@
       </symbol>
     </svg>
 
-    <script src="script.js?v=19"></script>
+    <script src="script.js?v=20"></script>
   </body>
 </html>
