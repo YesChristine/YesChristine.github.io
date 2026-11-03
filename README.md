@@ -46,16 +46,52 @@ repository, copy the `repo-card` block inside `vibe-panel` and update it with a 
 ## Add photos to an album
 
 Each album has a dedicated page in `albums/` and an image folder in `assets/albums/`. Add photos to
-the matching folder, then replace the `album-empty-state` block with a photo grid:
+the matching folder, optimize them, then replace the `album-empty-state` block with a photo grid.
+
+Large phone and camera images should not be served directly. If `ffmpeg` is installed, create
+480, 960, and 1600 pixel WebP versions:
+
+```powershell
+.\scripts\optimize-album-images.ps1
+```
+
+For another album, pass its folder:
+
+```powershell
+.\scripts\optimize-album-images.ps1 -AlbumDirectory .\assets\albums\mountain-days
+```
+
+Use responsive `picture` elements so browsers choose an appropriate file:
 
 ```html
 <div class="album-photo-grid">
   <figure>
-    <img src="../assets/albums/weekend-walks/first-photo.jpg" alt="Describe the photo" />
+    <picture>
+      <source
+        type="image/webp"
+        srcset="
+          ../assets/albums/weekend-walks/first-photo-480.webp 480w,
+          ../assets/albums/weekend-walks/first-photo-960.webp 960w,
+          ../assets/albums/weekend-walks/first-photo-1600.webp 1600w
+        "
+        sizes="(max-width: 480px) calc(100vw - 28px), (max-width: 760px) calc(50vw - 24px), 360px"
+      />
+      <img
+        src="../assets/albums/weekend-walks/first-photo-960.webp"
+        alt="Describe the photo"
+        width="1600"
+        height="2133"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
     <figcaption>An optional caption</figcaption>
   </figure>
 </div>
 ```
+
+Keep only the WebP variants in the published site. Retain full-resolution originals in a separate
+backup or archive if they may be needed later.
 
 Available album pages:
 
@@ -71,6 +107,7 @@ Available album pages:
 - `assets/ysming-profile.jpg`: personal portrait
 - `albums/`: standalone photo album pages
 - `assets/albums/`: destination folders for album photographs
+- `scripts/optimize-album-images.ps1`: creates responsive WebP album images
 - `favicon.svg`: point-cloud-inspired browser icon
 
 ## Deploy to GitHub Pages

@@ -5,6 +5,9 @@ const menuToggle = document.querySelector(".menu-toggle");
 const themeToggle = document.querySelector(".theme-toggle");
 const copyButton = document.querySelector("[data-copy]");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const compactNavigation = window.matchMedia(
+  "(max-width: 820px), (hover: none) and (pointer: coarse) and (max-width: 1100px)"
+);
 
 // Theme
 function setTheme(theme) {
@@ -50,6 +53,13 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeMenu();
 });
 
+if (compactNavigation.addEventListener) {
+  compactNavigation.addEventListener("change", closeMenu);
+} else {
+  compactNavigation.addListener(closeMenu);
+}
+window.addEventListener("orientationchange", closeMenu);
+
 // Sticky header state
 function updateHeader() {
   header?.classList.toggle("is-scrolled", window.scrollY > 20);
@@ -90,6 +100,8 @@ const navLinks = [...(nav?.querySelectorAll('a[href^="#"]') || [])];
 const navSections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
+let navigationLockUntil = 0;
+let navigationUnlockTimer = 0;
 
 function setActiveNavigation(activeId) {
   navLinks.forEach((link) => {
@@ -101,6 +113,8 @@ function setActiveNavigation(activeId) {
 }
 
 function updateActiveNavigation() {
+  if (performance.now() < navigationLockUntil) return;
+
   if (window.scrollY < 160) {
     setActiveNavigation(null);
     return;
@@ -118,7 +132,14 @@ function updateActiveNavigation() {
 
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
-    setActiveNavigation(link.getAttribute("href").slice(1));
+    const targetId = link.getAttribute("href").slice(1);
+    setActiveNavigation(targetId);
+    navigationLockUntil = performance.now() + 900;
+    window.clearTimeout(navigationUnlockTimer);
+    navigationUnlockTimer = window.setTimeout(() => {
+      navigationLockUntil = 0;
+      updateActiveNavigation();
+    }, 900);
   });
 });
 

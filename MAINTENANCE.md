@@ -83,21 +83,45 @@ python -m http.server 4173
 添加照片：
 
 1. 把图片放入对应目录，例如 `assets/albums/weekend-walks/`。
-2. 打开对应的相册 HTML。
-3. 用照片网格替换 `album-empty-state`：
+2. 先压缩图片。安装 `ffmpeg` 后运行：
+
+   ```powershell
+   .\scripts\optimize-album-images.ps1
+   ```
+
+   其他相册使用 `-AlbumDirectory .\assets\albums\相册目录`。
+
+3. 打开对应的相册 HTML。
+4. 用响应式照片网格替换 `album-empty-state`：
 
 ```html
 <div class="album-photo-grid">
   <figure>
-    <img src="../assets/albums/weekend-walks/01-park.jpg" alt="Describe the photo" />
-    <figcaption>Optional caption</figcaption>
-  </figure>
-  <figure>
-    <img src="../assets/albums/weekend-walks/02-lake.jpg" alt="Describe the photo" />
+    <picture>
+      <source
+        type="image/webp"
+        srcset="
+          ../assets/albums/weekend-walks/01-park-480.webp 480w,
+          ../assets/albums/weekend-walks/01-park-960.webp 960w,
+          ../assets/albums/weekend-walks/01-park-1600.webp 1600w
+        "
+        sizes="(max-width: 480px) calc(100vw - 28px), (max-width: 760px) calc(50vw - 24px), 360px"
+      />
+      <img
+        src="../assets/albums/weekend-walks/01-park-960.webp"
+        alt="Describe the photo"
+        width="1600"
+        height="2133"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
     <figcaption>Optional caption</figcaption>
   </figure>
 </div>
 ```
+
+不要把手机原图或相机原图直接放进发布目录。原始大图应另外备份，GitHub Pages 不需要部署它们。
 
 添加新相册：
 
